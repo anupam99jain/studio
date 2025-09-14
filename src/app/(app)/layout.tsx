@@ -64,7 +64,7 @@ export default function AppLayout({
 }) {
 
   return (
-    <AppContextProvider>
+    
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
@@ -139,6 +139,6 @@ export default function AppLayout({
           </SidebarInset>
         </SidebarProvider>
       </ThemeProvider>
-    </AppContextProvider>
+    
   );
 }
