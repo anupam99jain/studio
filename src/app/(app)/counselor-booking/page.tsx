@@ -1,7 +1,16 @@
+
+"use client";
+
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 const counselors = [
   {
@@ -21,15 +30,34 @@ const counselors = [
   },
 ];
 
+type Counselor = typeof counselors[0];
+
 export default function CounselorBookingPage() {
+  const [selectedCounselor, setSelectedCounselor] = useState<Counselor | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleBookClick = (counselor: Counselor) => {
+    setSelectedCounselor(counselor);
+    setIsDialogOpen(true);
+  };
+  
+  const handleBookingConfirm = () => {
+    toast({
+        title: "Booking Confirmed!",
+        description: `Your appointment with ${selectedCounselor?.name} has been scheduled.`,
+    });
+    setIsDialogOpen(false);
+  }
+
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold font-headline">Confidential Counselor Booking</h1>
         <p className="text-muted-foreground">Schedule a private session with a professional counselor.</p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 gap-8">
+        <div className="space-y-6">
             <h2 className="text-xl font-semibold">Available Counselors</h2>
             {counselors.map((counselor) => (
                 <Card key={counselor.name}>
@@ -44,23 +72,56 @@ export default function CounselorBookingPage() {
                         </div>
                     </CardHeader>
                     <CardFooter>
-                        <Button className="ml-auto">Book Appointment</Button>
+                        <Button className="ml-auto" onClick={() => handleBookClick(counselor)}>Book Appointment</Button>
                     </CardFooter>
                 </Card>
             ))}
         </div>
-        <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Select a Date</h2>
-            <Card>
-                <CardContent className="p-0">
-                    <Calendar
-                        mode="single"
-                        className="p-3 w-full"
-                    />
-                </CardContent>
-            </Card>
-        </div>
       </div>
+       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Book Appointment with {selectedCounselor?.name}</DialogTitle>
+            <DialogDescription>
+              Select a date and time that works for you.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="date">Date</Label>
+              <Calendar
+                mode="single"
+                selected={new Date()}
+                className="rounded-md border p-0"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="time">Time</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a time slot" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="9am">9:00 AM</SelectItem>
+                  <SelectItem value="10am">10:00 AM</SelectItem>
+                  <SelectItem value="11am">11:00 AM</SelectItem>
+                  <SelectItem value="1pm">1:00 PM</SelectItem>
+                  <SelectItem value="2pm">2:00 PM</SelectItem>
+                  <SelectItem value="3pm">3:00 PM</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="issue">Reason for your visit (optional)</Label>
+                <Textarea id="issue" placeholder="Briefly describe what you'd like to discuss."/>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+            <Button type="submit" onClick={handleBookingConfirm}>Confirm Booking</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
