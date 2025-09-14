@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, PlusCircle, Eye } from "lucide-react";
+import Link from "next/link";
 
 const forumPosts = [
   {
@@ -38,40 +39,44 @@ export default function PeerSupportPage() {
                 <h1 className="text-3xl font-bold font-headline">Anonymous Peer Support Forum</h1>
                 <p className="text-muted-foreground">Connect with fellow students, share experiences, and find support. All posts are anonymous.</p>
             </div>
-            <Button>
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Create Post
+            <Button asChild>
+                <Link href="/peer-support/new">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Create Post
+                </Link>
             </Button>
         </div>
 
         <div className="space-y-6">
             {forumPosts.map(post => (
-                <Card key={post.id} className="hover:shadow-md transition-shadow">
-                    <CardHeader>
-                        <CardTitle>{post.title}</CardTitle>
-                        <div className="flex gap-2 pt-2">
-                            {post.tags.map(tag => (
-                                <Badge key={tag} variant="secondary">{tag}</Badge>
-                            ))}
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                    </CardContent>
-                    <CardFooter className="flex justify-between items-center text-sm text-muted-foreground">
-                        <div className="flex gap-4">
-                            <div className="flex items-center gap-1">
-                                <MessageSquare className="h-4 w-4" />
-                                <span>{post.replies} Replies</span>
+                <Link key={post.id} href={`/peer-support/${post.id}`} className="block">
+                    <Card className="hover:shadow-md transition-shadow cursor-pointer">
+                        <CardHeader>
+                            <CardTitle>{post.title}</CardTitle>
+                            <div className="flex gap-2 pt-2">
+                                {post.tags.map(tag => (
+                                    <Badge key={tag} variant="secondary">{tag}</Badge>
+                                ))}
                             </div>
-                            <div className="flex items-center gap-1">
-                                <Eye className="h-4 w-4" />
-                                <span>{post.views} Views</span>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                        </CardContent>
+                        <CardFooter className="flex justify-between items-center text-sm text-muted-foreground">
+                            <div className="flex gap-4">
+                                <div className="flex items-center gap-1">
+                                    <MessageSquare className="h-4 w-4" />
+                                    <span>{post.replies} Replies</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <Eye className="h-4 w-4" />
+                                    <span>{post.views} Views</span>
+                                </div>
                             </div>
-                        </div>
-                        <Button variant="link">Read More</Button>
-                    </CardFooter>
-                </Card>
+                            <span className="text-primary hover:underline">Read More</span>
+                        </CardFooter>
+                    </Card>
+                </Link>
             ))}
         </div>
     </div>
