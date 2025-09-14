@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "audio_1",
+      "description": "Calm ocean waves",
+      "imageUrl": "https://picsum.photos/seed/101/600/400",
+      "imageHint": "ocean waves"
+    },
+    {
+      "id": "audio_2",
+      "description": "Forest sounds",
+      "imageUrl": "https://picsum.photos/seed/102/600/400",
+      "imageHint": "forest path"
+    },
+    {
+      "id": "audio_3",
+      "description": "Rainfall and thunder",
+      "imageUrl": "https://picsum.photos/seed/103/600/400",
+      "imageHint": "rain window"
+    },
+    {
+      "id": "guide_1",
+      "description": "Mindfulness for Beginners",
+      "imageUrl": "https://picsum.photos/seed/201/600/400",
+      "imageHint": "meditation nature"
+    },
+    {
+      "id": "guide_2",
+      "description": "Managing Stress and Anxiety",
+      "imageUrl": "https://picsum.photos/seed/202/600/400",
+      "imageHint": "calm lake"
+    },
+    {
+      "id": "guide_3",
+      "description": "Building Healthy Habits",
+      "imageUrl": "https://picsum.photos/seed/203/600/400",
+      "imageHint": "healthy food"
+    },
+    {
+      "id": "video_1",
+      "description": "Guided Meditation for Sleep",
+      "imageUrl": "https://picsum.photos/seed/301/600/400",
+      "imageHint": "night sky"
+    },
+    {
+      "id": "video_2",
+      "description": "Yoga for Relaxation",
+      "imageUrl": "https://picsum.photos/seed/302/600/400",
+      "imageHint": "yoga sunset"
+    },
+    {
+      "id": "video_3",
+      "description": "Breathing Exercises",
+      "imageUrl": "https://picsum.photos/seed/303/600/400",
+      "imageHint": "mountain view"
+    }
+  ]
 }
