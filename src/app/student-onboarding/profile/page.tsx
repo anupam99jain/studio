@@ -33,7 +33,18 @@ export default function StudentProfilePage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="college-name">College/University Name</Label>
-            <Input id="college-name" placeholder="E.g., Flourish University" />
+            <Select>
+              <SelectTrigger id="college-name">
+                <SelectValue placeholder="Select your university" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="mait">MAIT</SelectItem>
+                <SelectItem value="nsut">NSUT</SelectItem>
+                <SelectItem value="dtu">DTU</SelectItem>
+                <SelectItem value="iitd">IIT Delhi</SelectItem>
+                <SelectItem value="iiitd">IIIT Delhi</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex justify-end">
             <Button asChild>
