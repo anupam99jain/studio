@@ -12,6 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { Phone, AlertTriangle } from "lucide-react";
+import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
 const counselors = [
   {
@@ -32,34 +34,74 @@ const counselors = [
 ];
 
 type Counselor = typeof counselors[0];
+type Appointment = {
+    counselor: Counselor;
+    date: Date;
+}
 
 export default function CounselorBookingPage() {
   const [selectedCounselor, setSelectedCounselor] = useState<Counselor | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [bookedAppointments, setBookedAppointments] = useState<Appointment[]>([]);
   const { toast } = useToast();
 
   const handleBookClick = (counselor: Counselor) => {
     setSelectedCounselor(counselor);
+    setDate(new Date());
     setIsDialogOpen(true);
   };
   
   const handleBookingConfirm = () => {
+    if (!selectedCounselor || !date) return;
+
+    const weekStart = startOfWeek(date, { weekStartsOn: 1 });
+    const weekEnd = endOfWeek(date, { weekStartsOn: 1 });
+    
+    const bookingsInWeek = bookedAppointments.filter(appt => 
+      isWithinInterval(appt.date, { start: weekStart, end: weekEnd })
+    );
+
+    if (bookingsInWeek.length >= 2) {
+      toast({
+        variant: "destructive",
+        title: "Booking Limit Reached",
+        description: "You can only book a maximum of two sessions per week.",
+      });
+      return;
+    }
+
+    const newAppointment = {counselor: selectedCounselor, date: date};
+    setBookedAppointments(prev => [...prev, newAppointment]);
+
     toast({
         title: "Booking Confirmed!",
         description: `Your appointment with ${selectedCounselor?.name} has been scheduled.`,
     });
     setIsDialogOpen(false);
   }
+  
+  const bookedDates = bookedAppointments.map(appt => appt.date);
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold font-headline">Confidential Counselor Booking</h1>
-        <p className="text-muted-foreground">Schedule a private session with a professional counselor.</p>
+      <div className="flex justify-between items-start">
+        <div>
+            <h1 className="text-3xl font-bold font-headline">Confidential Counselor Booking</h1>
+            <p className="text-muted-foreground">Schedule a private session with a professional counselor.</p>
+        </div>
+        <Card className="bg-destructive/10 border-destructive/50">
+            <CardHeader className="flex-row items-center gap-4 p-4">
+                <Phone className="h-6 w-6 text-destructive" />
+                <div>
+                    <CardTitle className="text-lg text-destructive">24/7 Helpline</CardTitle>
+                    <CardDescription className="text-destructive/80">1-800-273-8255</CardDescription>
+                </div>
+            </CardHeader>
+        </Card>
       </div>
-      <div className="grid grid-cols-1 gap-8">
-        <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-6">
             <h2 className="text-xl font-semibold">Available Counselors</h2>
             {counselors.map((counselor) => (
                 <Card key={counselor.name}>
@@ -79,13 +121,32 @@ export default function CounselorBookingPage() {
                 </Card>
             ))}
         </div>
+         <div className="space-y-6">
+            <h2 className="text-xl font-semibold">Your Booked Sessions</h2>
+            <Card>
+                <CardContent className="p-2">
+                    <Calendar
+                        mode="multiple"
+                        selected={bookedDates}
+                        ISOWeek
+                        className="w-full"
+                        classNames={{
+                           day_selected: "bg-primary text-primary-foreground hover:bg-primary/90 focus:bg-primary/90",
+                        }}
+                    />
+                </CardContent>
+                 <CardFooter className="text-sm text-muted-foreground p-3 pt-0">
+                    <p>You have {bookedAppointments.length} upcoming session(s).</p>
+                </CardFooter>
+            </Card>
+        </div>
       </div>
        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Book Appointment with {selectedCounselor?.name}</DialogTitle>
             <DialogDescription>
-              Select a date and time that works for you.
+              Select a date and time that works for you. You can book a maximum of two sessions per week.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -96,6 +157,7 @@ export default function CounselorBookingPage() {
                 selected={date}
                 onSelect={setDate}
                 className="rounded-md border"
+                disabled={{ before: new Date() }}
               />
             </div>
             <div className="grid gap-2">
