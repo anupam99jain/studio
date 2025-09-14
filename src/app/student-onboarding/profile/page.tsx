@@ -1,12 +1,32 @@
-import Link from "next/link";
+
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight } from "lucide-react";
+import { useAppContext } from "@/app/(app)/app-context";
+import { FormEvent } from "react";
 
 export default function StudentProfilePage() {
+  const router = useRouter();
+  const { student, setStudent } = useAppContext();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const name = formData.get("name") as string;
+    const age = formData.get("age") as string;
+    const collegeYear = formData.get("college-year") as string;
+    const collegeName = formData.get("college-name") as string;
+    
+    setStudent(prev => ({ ...prev, name, age: parseInt(age) || 0, collegeYear, collegeName }));
+    router.push("/student-onboarding/verify-id");
+  };
+
   return (
     <Card className="w-full shadow-lg">
       <CardHeader>
@@ -14,18 +34,18 @@ export default function StudentProfilePage() {
         <CardDescription>This information helps us tailor your experience.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
-            <Input id="name" placeholder="Enter your full name" />
+            <Input id="name" name="name" placeholder="Enter your full name" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="age">Age</Label>
-            <Input id="age" type="number" placeholder="Enter your age" />
+            <Input id="age" name="age" type="number" placeholder="Enter your age" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="college-year">College Year</Label>
-            <Select>
+            <Select name="college-year" required>
               <SelectTrigger id="college-year">
                 <SelectValue placeholder="Select your year" />
               </SelectTrigger>
@@ -39,7 +59,7 @@ export default function StudentProfilePage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="college-name">College/University Name</Label>
-            <Select>
+            <Select name="college-name" required>
               <SelectTrigger id="college-name">
                 <SelectValue placeholder="Select your university" />
               </SelectTrigger>
@@ -53,11 +73,9 @@ export default function StudentProfilePage() {
             </Select>
           </div>
           <div className="flex justify-end">
-            <Button asChild>
-              <Link href="/student-onboarding/verify-id">
+            <Button type="submit">
                 Continue
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
             </Button>
           </div>
         </form>

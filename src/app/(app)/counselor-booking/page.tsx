@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, AlertTriangle } from "lucide-react";
 import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
+import { useAppContext } from "../app-context";
 
 const counselors = [
   {
@@ -34,16 +35,12 @@ const counselors = [
 ];
 
 type Counselor = typeof counselors[0];
-type Appointment = {
-    counselor: Counselor;
-    date: Date;
-}
 
 export default function CounselorBookingPage() {
+  const { appointments, addAppointment } = useAppContext();
   const [selectedCounselor, setSelectedCounselor] = useState<Counselor | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [bookedAppointments, setBookedAppointments] = useState<Appointment[]>([]);
   const { toast } = useToast();
 
   const handleBookClick = (counselor: Counselor) => {
@@ -58,8 +55,8 @@ export default function CounselorBookingPage() {
     const weekStart = startOfWeek(date, { weekStartsOn: 1 });
     const weekEnd = endOfWeek(date, { weekStartsOn: 1 });
     
-    const bookingsInWeek = bookedAppointments.filter(appt => 
-      isWithinInterval(appt.date, { start: weekStart, end: weekEnd })
+    const bookingsInWeek = appointments.filter(appt => 
+      isWithinInterval(new Date(appt.date), { start: weekStart, end: weekEnd })
     );
 
     if (bookingsInWeek.length >= 2) {
@@ -71,8 +68,8 @@ export default function CounselorBookingPage() {
       return;
     }
 
-    const newAppointment = {counselor: selectedCounselor, date: date};
-    setBookedAppointments(prev => [...prev, newAppointment]);
+    const newAppointment = {counselor: selectedCounselor, date: date.toISOString()};
+    addAppointment(newAppointment);
 
     toast({
         title: "Booking Confirmed!",
@@ -81,7 +78,7 @@ export default function CounselorBookingPage() {
     setIsDialogOpen(false);
   }
   
-  const bookedDates = bookedAppointments.map(appt => appt.date);
+  const bookedDates = appointments.map(appt => new Date(appt.date));
 
   return (
     <div className="space-y-8">
@@ -136,7 +133,7 @@ export default function CounselorBookingPage() {
                     />
                 </CardContent>
                  <CardFooter className="text-sm text-muted-foreground p-3 pt-0">
-                    <p>You have {bookedAppointments.length} upcoming session(s).</p>
+                    <p>You have {appointments.length} upcoming session(s).</p>
                 </CardFooter>
             </Card>
         </div>

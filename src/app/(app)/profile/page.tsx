@@ -4,15 +4,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-
-const wellnessData = [
-  { month: "January", phq9: 18, gad7: 15, ghq12: 25 },
-  { month: "February", phq9: 16, gad7: 12, ghq12: 22 },
-  { month: "March", phq9: 14, gad7: 10, ghq12: 20 },
-  { month: "April", phq9: 10, gad7: 8, ghq12: 15 },
-  { month: "May", phq9: 8, gad7: 6, ghq12: 12 },
-  { month: "June", phq9: 5, gad7: 4, ghq12: 10 },
-]
+import { useAppContext } from "../app-context"
 
 const chartConfig = {
   phq9: {
@@ -63,18 +55,10 @@ const scoreInterpretations = {
 }
 
 export default function ProfilePage() {
-  const latestScores = wellnessData[wellnessData.length - 1];
+  const { student, getInterpretation } = useAppContext();
 
-  const getInterpretation = (type: 'phq9' | 'gad7' | 'ghq12', score: number) => {
-    const interpretation = scoreInterpretations[type];
-    for (const range in interpretation.levels) {
-      const [min, max] = range.split('-').map(Number);
-      if (score >= min && score <= max) {
-        return interpretation.levels[range as keyof typeof interpretation.levels];
-      }
-    }
-    return "N/A";
-  }
+  const wellnessData = student.wellnessHistory;
+  const latestScores = wellnessData[wellnessData.length - 1] || { phq9: 0, gad7: 0, ghq12: 0 };
 
   return (
     <div className="space-y-8">

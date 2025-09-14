@@ -8,9 +8,11 @@ import { phq9Questions, gad7Questions, ghq12Questions, standardOptions } from "@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Rocket } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useAppContext } from "@/app/(app)/app-context";
+import { format } from 'date-fns';
 
 type Question = {
   id: string;
@@ -56,6 +58,8 @@ const QuestionnaireForm = ({
 );
 
 export default function QuestionnairesPage() {
+  const router = useRouter();
+  const { addWellnessEntry } = useAppContext();
   const [phq9Answers, setPhq9Answers] = useState<Answers>({});
   const [gad7Answers, setGad7Answers] = useState<Answers>({});
   const [ghq12Answers, setGhq12Answers] = useState<Answers>({});
@@ -77,6 +81,23 @@ export default function QuestionnairesPage() {
       setGhq12Answers(prev => ({ ...prev, [questionId]: value }));
     }
   };
+
+  const handleCompleteOnboarding = () => {
+    const phq9Score = Object.values(phq9Answers).reduce((sum, val) => sum + parseInt(val), 0);
+    const gad7Score = Object.values(gad7Answers).reduce((sum, val) => sum + parseInt(val), 0);
+    const ghq12Score = Object.values(ghq12Answers).reduce((sum, val) => sum + parseInt(val), 0);
+
+    const newEntry = {
+      month: format(new Date(), 'MMMM'),
+      phq9: phq9Score,
+      gad7: gad7Score,
+      ghq12: ghq12Score,
+    };
+
+    addWellnessEntry(newEntry);
+    router.push("/home");
+  };
+
 
   return (
     <Card className="w-full shadow-lg">
@@ -120,11 +141,9 @@ export default function QuestionnairesPage() {
             </TabsContent>
           </ScrollArea>
           <div className="flex justify-end mt-6">
-            <Button asChild={areAllFormsComplete} disabled={!areAllFormsComplete}>
-              <Link href="/ai-chatbot">
+            <Button onClick={handleCompleteOnboarding} disabled={!areAllFormsComplete}>
                 Complete Onboarding
                 <Rocket className="ml-2 h-4 w-4" />
-              </Link>
             </Button>
           </div>
         </Tabs>
