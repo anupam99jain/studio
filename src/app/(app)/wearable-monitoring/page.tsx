@@ -1,7 +1,13 @@
 
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { HeartPulse, Activity, Zap, Moon } from "lucide-react";
+import { ConnectDeviceDialog } from "@/components/connect-device-dialog";
+
+type DeviceType = "Smartwatch" | "Smart Ring";
 
 function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
     return (
@@ -49,6 +55,14 @@ function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function WearableMonitoringPage() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [deviceType, setDeviceType] = useState<DeviceType | null>(null);
+
+  const handleConnectClick = (type: DeviceType) => {
+    setDeviceType(type);
+    setIsDialogOpen(true);
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -66,13 +80,13 @@ export default function WearableMonitoringPage() {
             <SmartwatchIcon className="w-12 h-12 text-primary mb-4" />
             <h3 className="text-lg font-semibold mb-2">Smartwatches</h3>
             <p className="text-sm text-muted-foreground mb-4">Apple Watch, Fitbit, Garmin, etc.</p>
-            <Button>Connect</Button>
+            <Button onClick={() => handleConnectClick("Smartwatch")}>Connect</Button>
           </Card>
           <Card className="flex flex-col items-center justify-center p-6 text-center">
             <SmartRingIcon className="w-12 h-12 text-primary mb-4" />
             <h3 className="text-lg font-semibold mb-2">Smart Rings</h3>
             <p className="text-sm text-muted-foreground mb-4">Oura Ring, and other smart rings.</p>
-            <Button>Connect</Button>
+            <Button onClick={() => handleConnectClick("Smart Ring")}>Connect</Button>
           </Card>
         </CardContent>
       </Card>
@@ -125,6 +139,11 @@ export default function WearableMonitoringPage() {
           </Card>
         </CardContent>
       </Card>
+      <ConnectDeviceDialog 
+        isOpen={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        deviceType={deviceType}
+      />
     </div>
   );
 }
