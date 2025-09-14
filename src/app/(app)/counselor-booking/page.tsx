@@ -17,17 +17,17 @@ import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
 const counselors = [
   {
-    name: "Dr. Emily Carter",
+    name: "Priyanka Dey",
     specialty: "Cognitive Behavioral Therapy",
     image: "https://picsum.photos/seed/counselor1/100/100",
   },
   {
-    name: "Dr. Ben Adams",
+    name: "Janani Vasanth",
     specialty: "Mindfulness & Stress Reduction",
     image: "https://picsum.photos/seed/counselor2/100/100",
   },
   {
-    name: "Dr. Olivia Chen",
+    name: "Vishakha Jaiswal",
     specialty: "Anxiety & Depression Specialist",
     image: "https://picsum.photos/seed/counselor3/100/100",
   },
