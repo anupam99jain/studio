@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from "@/components/ui/sidebar";
-import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon } from "lucide-react";
+import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse } from "lucide-react";
 import Link from "next/link";
 import { FlourishULogo } from "@/components/logo";
 
@@ -48,6 +48,14 @@ export default function AppLayout({
                 <Link href="/resource-hub">
                   <Library />
                   <span>Resource Hub</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Wearable Monitoring">
+                <Link href="/wearable-monitoring">
+                  <HeartPulse />
+                  <span>Wearable Monitoring</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
