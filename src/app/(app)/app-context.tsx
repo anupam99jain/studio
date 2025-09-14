@@ -74,12 +74,12 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         setAppointments(prev => [...prev, appointment]);
     };
 
-    const addWellnessEntry = (entry: WellnessEntry) => {
+    const addWellnessEntry = useCallback((entry: WellnessEntry) => {
         setStudent(prev => ({
             ...prev,
             wellnessHistory: [...prev.wellnessHistory.filter(e => e.month !== entry.month), entry]
         }));
-    };
+    }, []);
 
     const getInterpretation = useCallback((type: 'phq9' | 'gad7' | 'ghq12', score: number) => {
       const interpretation = scoreInterpretations[type];
