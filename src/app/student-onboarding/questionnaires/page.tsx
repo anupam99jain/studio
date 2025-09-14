@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -58,13 +59,13 @@ export default function QuestionnairesPage() {
   const [phq9Answers, setPhq9Answers] = useState<Answers>({});
   const [gad7Answers, setGad7Answers] = useState<Answers>({});
   const [ghq12Answers, setGhq12Answers] = useState<Answers>({});
-  const [isAnyFormComplete, setIsAnyFormComplete] = useState(false);
+  const [areAllFormsComplete, setAreAllFormsComplete] = useState(false);
 
   useEffect(() => {
     const isPhq9Complete = Object.keys(phq9Answers).length === phq9Questions.length;
     const isGad7Complete = Object.keys(gad7Answers).length === gad7Questions.length;
     const isGhq12Complete = Object.keys(ghq12Answers).length === ghq12Questions.length;
-    setIsAnyFormComplete(isPhq9Complete || isGad7Complete || isGhq12Complete);
+    setAreAllFormsComplete(isPhq9Complete && isGad7Complete && isGhq12Complete);
   }, [phq9Answers, gad7Answers, ghq12Answers]);
 
   const handleAnswerChange = (form: 'phq9' | 'gad7' | 'ghq12') => (questionId: string, value: string) => {
@@ -81,7 +82,7 @@ export default function QuestionnairesPage() {
     <Card className="w-full shadow-lg">
       <CardHeader>
         <CardTitle className="font-headline text-3xl">Wellness Check-in</CardTitle>
-        <CardDescription>Your responses are confidential and help us understand how we can best support you. Please complete at least one form.</CardDescription>
+        <CardDescription>Your responses are confidential and help us understand how we can best support you. Please complete all three forms.</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="phq9" className="w-full">
@@ -119,7 +120,7 @@ export default function QuestionnairesPage() {
             </TabsContent>
           </ScrollArea>
           <div className="flex justify-end mt-6">
-            <Button asChild={isAnyFormComplete} disabled={!isAnyFormComplete}>
+            <Button asChild={areAllFormsComplete} disabled={!areAllFormsComplete}>
               <Link href="/ai-chatbot">
                 Complete Onboarding
                 <Rocket className="ml-2 h-4 w-4" />
