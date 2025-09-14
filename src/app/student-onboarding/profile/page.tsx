@@ -16,6 +16,14 @@ export default function StudentProfilePage() {
       <CardContent>
         <form className="space-y-6">
           <div className="space-y-2">
+            <Label htmlFor="name">Full Name</Label>
+            <Input id="name" placeholder="Enter your full name" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="age">Age</Label>
+            <Input id="age" type="number" placeholder="Enter your age" />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="college-year">College Year</Label>
             <Select>
               <SelectTrigger id="college-year">
