@@ -1,5 +1,6 @@
+
 import { redirect } from 'next/navigation';
 
 export default function AppPage() {
-  redirect('/ai-chatbot');
+  redirect('/home');
 }

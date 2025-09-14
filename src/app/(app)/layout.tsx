@@ -1,10 +1,11 @@
+
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from "@/components/ui/sidebar";
-import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun } from "lucide-react";
+import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun, Home } from "lucide-react";
 import Link from "next/link";
 import { FlourishULogo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -37,6 +38,14 @@ export default function AppLayout({
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu>
+               <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Home">
+                  <Link href="/home">
+                    <Home />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="AI Chatbot">
                   <Link href="/ai-chatbot">
