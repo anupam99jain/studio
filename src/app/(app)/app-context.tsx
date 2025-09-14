@@ -77,7 +77,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     const addWellnessEntry = useCallback((entry: WellnessEntry) => {
         setStudent(prev => ({
             ...prev,
-            wellnessHistory: [...prev.wellnessHistory.filter(e => e.month !== entry.month), entry]
+            // Simple addition of the new entry to the history array
+            wellnessHistory: [...prev.wellnessHistory, entry]
         }));
     }, []);
 
