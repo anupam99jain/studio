@@ -26,8 +26,6 @@ export default function StudentProfilePage() {
                 <SelectItem value="sophomore">Sophomore</SelectItem>
                 <SelectItem value="junior">Junior</SelectItem>
                 <SelectItem value="senior">Senior</SelectItem>
-                <SelectItem value="graduate">Graduate Student</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
           </div>
