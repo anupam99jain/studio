@@ -54,23 +54,21 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
                 <div className="bg-muted rounded-lg p-8 flex flex-col items-center justify-center text-center">
                     <Video className="h-16 w-16 text-primary mb-4" />
                     <p className="text-lg font-medium mb-4">Now playing: {resource.description}</p>
-                    <video controls autoPlay className="w-full rounded-lg">
-                        {/* Using a placeholder video file. In a real app, this would be a dynamic src */}
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
                 </div>
             </>
         );
       case "guide":
         return (
-            <div className="bg-muted rounded-lg p-8">
+            <>
                 <DialogHeader>
                     <div className="flex items-center gap-4 mb-4">
                         <div className="bg-primary/10 text-primary p-3 rounded-full">
                             <FileText className="h-8 w-8" />
                         </div>
-                        <DialogTitle className="text-2xl font-bold font-headline">{resource.description}</DialogTitle>
+                        <div>
+                            <DialogTitle className="text-2xl font-bold font-headline">{resource.description}</DialogTitle>
+                            <DialogDescription>Wellness Guide</DialogDescription>
+                        </div>
                     </div>
                 </DialogHeader>
                 <div className="prose prose-sm max-w-none text-foreground">
@@ -84,7 +82,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
                         Remember, taking small steps and being kind to yourself are key components of mental well-being.
                     </p>
                 </div>
-            </div>
+            </>
         );
       default:
         return <p>Unsupported resource type.</p>;
