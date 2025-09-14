@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Date } from "react-day-picker";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -35,6 +36,7 @@ type Counselor = typeof counselors[0];
 export default function CounselorBookingPage() {
   const [selectedCounselor, setSelectedCounselor] = useState<Counselor | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(new Date());
   const { toast } = useToast();
 
   const handleBookClick = (counselor: Counselor) => {
@@ -89,10 +91,11 @@ export default function CounselorBookingPage() {
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="date">Date</Label>
-              <Calendar
+               <Calendar
                 mode="single"
-                selected={new Date()}
-                className="rounded-md border p-0"
+                selected={date}
+                onSelect={setDate}
+                className="rounded-md border"
               />
             </div>
             <div className="grid gap-2">
