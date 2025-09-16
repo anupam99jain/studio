@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
 import type { E164Number } from "libphonenumber-js/core";
+import { useRouter } from "next/navigation";
 
 function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -38,12 +39,19 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function SignupPage() {
   const [showOtp, setShowOtp] = useState(false);
   const [phone, setPhone] = useState<E164Number | undefined>(undefined);
+  const router = useRouter();
 
   const handleSendOtp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // Here you would typically call an API to send the OTP
     setShowOtp(true);
   };
+
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real app, you would verify the OTP here before navigating.
+    router.push('/role-selection');
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
@@ -81,7 +89,7 @@ export default function SignupPage() {
               </div>
             </div>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSignUp}>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <PhoneInput
@@ -105,8 +113,8 @@ export default function SignupPage() {
                   Send OTP
                 </Button>
               ) : (
-                <Button type="submit" className="w-full" asChild>
-                  <Link href="/role-selection">Verify OTP & Sign Up</Link>
+                <Button type="submit" className="w-full">
+                  Verify OTP & Sign Up
                 </Button>
               )}
             </form>

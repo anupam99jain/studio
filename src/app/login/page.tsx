@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
 import type { E164Number } from "libphonenumber-js/core";
+import { useRouter } from "next/navigation";
 
 function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -38,12 +39,20 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function LoginPage() {
   const [showOtp, setShowOtp] = useState(false);
   const [phone, setPhone] = useState<E164Number | undefined>(undefined);
+  const router = useRouter();
 
   const handleSendOtp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // Here you would typically call an API to send the OTP
     setShowOtp(true);
   };
+  
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real app, you would verify the OTP here.
+    // We'll just navigate to the home page for now.
+    router.push('/home');
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
@@ -59,13 +68,13 @@ export default function LoginPage() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <Button variant="outline" asChild>
-                <Link href="/role-selection">
+                <Link href="/home">
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/role-selection">
+                <Link href="/home">
                   <LinkedinIcon className="mr-2 h-5 w-5" />
                   LinkedIn
                 </Link>
@@ -81,7 +90,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleLogin}>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <PhoneInput
@@ -105,8 +114,8 @@ export default function LoginPage() {
                   Send OTP
                 </Button>
               ) : (
-                <Button type="submit" className="w-full" asChild>
-                  <Link href="/role-selection">Verify OTP & Login</Link>
+                <Button type="submit" className="w-full">
+                  Verify OTP & Login
                 </Button>
               )}
             </form>
