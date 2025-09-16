@@ -63,13 +63,13 @@ export default function QuestionnairesPage() {
   const [phq9Answers, setPhq9Answers] = useState<Answers>({});
   const [gad7Answers, setGad7Answers] = useState<Answers>({});
   const [ghq12Answers, setGhq12Answers] = useState<Answers>({});
-  const [areAllFormsComplete, setAreAllFormsComplete] = useState(false);
+  const [isAtLeastOneFormComplete, setIsAtLeastOneFormComplete] = useState(false);
 
   useEffect(() => {
     const isPhq9Complete = Object.keys(phq9Answers).length === phq9Questions.length;
     const isGad7Complete = Object.keys(gad7Answers).length === gad7Questions.length;
     const isGhq12Complete = Object.keys(ghq12Answers).length === ghq12Questions.length;
-    setAreAllFormsComplete(isPhq9Complete && isGad7Complete && isGhq12Complete);
+    setIsAtLeastOneFormComplete(isPhq9Complete || isGad7Complete || isGhq12Complete);
   }, [phq9Answers, gad7Answers, ghq12Answers]);
 
   const handleAnswerChange = (form: 'phq9' | 'gad7' | 'ghq12') => (questionId: string, value: string) => {
@@ -83,9 +83,13 @@ export default function QuestionnairesPage() {
   };
 
   const handleCompleteOnboarding = () => {
-    const phq9Score = Object.values(phq9Answers).reduce((sum, val) => sum + parseInt(val), 0);
-    const gad7Score = Object.values(gad7Answers).reduce((sum, val) => sum + parseInt(val), 0);
-    const ghq12Score = Object.values(ghq12Answers).reduce((sum, val) => sum + parseInt(val), 0);
+    const isPhq9Complete = Object.keys(phq9Answers).length === phq9Questions.length;
+    const isGad7Complete = Object.keys(gad7Answers).length === gad7Questions.length;
+    const isGhq12Complete = Object.keys(ghq12Answers).length === ghq12Questions.length;
+
+    const phq9Score = isPhq9Complete ? Object.values(phq9Answers).reduce((sum, val) => sum + parseInt(val), 0) : 0;
+    const gad7Score = isGad7Complete ? Object.values(gad7Answers).reduce((sum, val) => sum + parseInt(val), 0) : 0;
+    const ghq12Score = isGhq12Complete ? Object.values(ghq12Answers).reduce((sum, val) => sum + parseInt(val), 0) : 0;
 
     const newEntry = {
       month: format(new Date(), 'MMMM'),
@@ -103,7 +107,7 @@ export default function QuestionnairesPage() {
     <Card className="w-full shadow-lg">
       <CardHeader>
         <CardTitle className="font-headline text-3xl">Wellness Check-in</CardTitle>
-        <CardDescription>Your responses are confidential and help us understand how we can best support you. Please complete all three forms.</CardDescription>
+        <CardDescription>Your responses are confidential and help us understand how we can best support you. Please complete at least one form to continue.</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="phq9" className="w-full">
@@ -141,7 +145,7 @@ export default function QuestionnairesPage() {
             </TabsContent>
           </ScrollArea>
           <div className="flex justify-end mt-6">
-            <Button onClick={handleCompleteOnboarding} disabled={!areAllFormsComplete}>
+            <Button onClick={handleCompleteOnboarding} disabled={!isAtLeastOneFormComplete}>
                 Complete Onboarding
                 <Rocket className="ml-2 h-4 w-4" />
             </Button>
