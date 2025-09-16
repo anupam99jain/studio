@@ -49,8 +49,8 @@ export default function HomePage() {
             <CardContent>
                 <div className="text-sm text-muted-foreground grid grid-cols-2 gap-2">
                     <div className="font-semibold text-foreground">Age: <span className="font-normal">{student.age > 0 ? student.age : "N/A"}</span></div>
-                    <div className="font-semibold text-foreground">Year: <span className="font-normal">{student.collegeYear || "N/A"}</span></div>
-                    <div className="font-semibold text-foreground col-span-2">University: <span className="font-normal">{student.collegeName || "N/A"}</span></div>
+                    <div className="font-semibold text-foreground">Year: <span className="font-normal uppercase">{student.collegeYear || "N/A"}</span></div>
+                    <div className="font-semibold text-foreground col-span-2">University: <span className="font-normal uppercase">{student.collegeName || "N/A"}</span></div>
                 </div>
             </CardContent>
         </Card>
