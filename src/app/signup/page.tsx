@@ -33,7 +33,7 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [showOtp, setShowOtp] = useState(false);
 
   const handleSendOtp = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,8 +49,8 @@ export default function LoginPage() {
           <div className="mx-auto mb-4">
             <FlourishULogo />
           </div>
-          <CardTitle className="font-headline text-3xl">Welcome Back</CardTitle>
-          <CardDescription>Choose your preferred login method to continue.</CardDescription>
+          <CardTitle className="font-headline text-3xl">Create an Account</CardTitle>
+          <CardDescription>Join FlourishU today. It's free and always will be.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -74,7 +74,7 @@ export default function LoginPage() {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                <span className="bg-card px-2 text-muted-foreground">Or sign up with your phone</span>
               </div>
             </div>
 
@@ -97,14 +97,14 @@ export default function LoginPage() {
                 </Button>
               ) : (
                 <Button type="submit" className="w-full" asChild>
-                  <Link href="/role-selection">Verify OTP & Login</Link>
+                  <Link href="/role-selection">Verify OTP & Sign Up</Link>
                 </Button>
               )}
             </form>
             <div className="text-center text-sm">
-                Don&apos;t have an account?{' '}
-                <Link href="/signup" className="underline">
-                    Create a new account
+                Already have an account?{' '}
+                <Link href="/login" className="underline">
+                    Log in
                 </Link>
             </div>
           </div>
