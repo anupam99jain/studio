@@ -10,6 +10,7 @@ import { FlourishULogo } from "@/components/logo";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
+import type { E164Number } from "libphonenumber-js/core";
 
 function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -36,6 +37,7 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export default function LoginPage() {
   const [showOtp, setShowOtp] = useState(false);
+  const [phone, setPhone] = useState<E164Number | undefined>(undefined);
 
   const handleSendOtp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -86,6 +88,8 @@ export default function LoginPage() {
                   id="phone"
                   placeholder="Enter your phone number"
                   disabled={showOtp}
+                  value={phone}
+                  onChange={setPhone}
                 />
               </div>
 
