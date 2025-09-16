@@ -9,9 +9,8 @@ import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon,
 import Link from "next/link";
 import { FlourishULogo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ThemeProvider } from "@/components/theme-provider";
 import { useRouter } from "next/navigation";
-import { AppContextProvider, useAppContext } from "./app-context";
+import { useAppContext } from "./app-context";
 
 function UserProfile() {
   const { student } = useAppContext();
@@ -64,81 +63,72 @@ export default function AppLayout({
 }) {
 
   return (
-    
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <SidebarProvider>
-          <Sidebar>
-            <SidebarHeader>
-              <FlourishULogo />
-            </SidebarHeader>
-            <SidebarContent>
-              <SidebarMenu>
-                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="Home">
-                    <Link href="/home">
-                      <Home />
-                      <span>Home</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="AI Chatbot">
-                    <Link href="/ai-chatbot">
-                      <Bot />
-                      <span>AI Chatbot</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="Counselor Booking">
-                    <Link href="/counselor-booking">
-                      <CalendarCheck />
-                      <span>Counselor Booking</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="Peer Support Forum">
-                    <Link href="/peer-support">
-                      <Users />
-                      <span>Peer Support Forum</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="Resource Hub">
-                    <Link href="/resource-hub">
-                      <Library />
-                      <span>Resource Hub</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="Wearable Monitoring">
-                    <Link href="/wearable-monitoring">
-                      <HeartPulse />
-                      <span>Wearable Monitoring</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarContent>
-            <SidebarFooter>
-              <UserProfile />
-            </SidebarFooter>
-          </Sidebar>
-          <SidebarInset>
-            <main className="h-full p-4 sm:p-6 lg:p-8">
-              {children}
-            </main>
-          </SidebarInset>
-        </SidebarProvider>
-      </ThemeProvider>
-    
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <FlourishULogo />
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarMenu>
+              <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Home">
+                <Link href="/home">
+                  <Home />
+                  <span>Home</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="AI Chatbot">
+                <Link href="/ai-chatbot">
+                  <Bot />
+                  <span>AI Chatbot</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Counselor Booking">
+                <Link href="/counselor-booking">
+                  <CalendarCheck />
+                  <span>Counselor Booking</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Peer Support Forum">
+                <Link href="/peer-support">
+                  <Users />
+                  <span>Peer Support Forum</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Resource Hub">
+                <Link href="/resource-hub">
+                  <Library />
+                  <span>Resource Hub</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Wearable Monitoring">
+                <Link href="/wearable-monitoring">
+                  <HeartPulse />
+                  <span>Wearable Monitoring</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarContent>
+        <SidebarFooter>
+          <UserProfile />
+        </SidebarFooter>
+      </Sidebar>
+      <SidebarInset>
+        <main className="h-full p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

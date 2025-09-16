@@ -2,7 +2,6 @@
 "use client";
 
 import { FlourishULogo } from "@/components/logo";
-import { AppContextProvider } from "@/app/(app)/app-context";
 
 export default function OnboardingLayout({
   children,
