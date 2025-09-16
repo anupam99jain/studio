@@ -44,10 +44,13 @@ const guideContent: {[key: string]: React.ReactNode} = {
     "guide_3": (
         <div className="prose prose-sm max-w-none text-foreground">
             <p className="lead">
-                This is a placeholder for the 'Building Healthy Habits' guide. This space will soon contain practical tips and strategies to help you cultivate positive routines for your mental and physical well-being.
+                Building healthy habits goes hand-in-hand with stress management, because small daily routines form the foundation for lasting well-being.
             </p>
             <p>
-                Remember that starting small is the key. Choose one simple habit, like drinking a glass of water when you wake up or taking a five-minute walk, and build from there.
+                Start by choosing just one gentle habit—like maintaining a regular sleep schedule, or making time for a walk or quiet reflection each day. Setting realistic and kind goals for oneself, celebrating even the tiniest progress, and practicing patience on setbacks all reinforce positive behavioral change over time.
+            </p>
+            <p>
+                Sharing intentions with friends or family can offer encouragement and accountability as these healthier habits become a comforting routine.
             </p>
         </div>
     ),
