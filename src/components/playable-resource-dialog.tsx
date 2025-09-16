@@ -18,13 +18,7 @@ const guideContent: {[key: string]: React.ReactNode} = {
                 Mindfulness is a gentle, deeply healing practice that offers comfort and hope—even for those feeling weighed down by depression. At its heart, mindfulness means simply paying attention to the present moment, just as it is, without judgment or criticism. For beginners, this could be as simple as noticing the sensation of the breath entering and leaving the body, the feeling of clothes on the skin, or the colors and sounds in the environment. There is no need for incense, perfect silence, or crossed legs; mindfulness can be practiced while sitting, lying down, or even during simple daily activities like taking a walk or sipping tea.
             </p>
             <p>
-                Scientific studies show that practicing mindfulness for just 10 minutes a day can actually change the structure of the brain, strengthening the ability to handle difficult emotions and preventing repeated episodes of depression. People who meditate regularly learn to experience feelings like sadness without being overwhelmed or tangled up in negative thoughts—unlike those who do not meditate, who often get caught up in dwelling and worrying. Through regular practice, mindfulness helps individuals become more aware of their automatic thought patterns, offering the empowering realization that it’s possible to gently guide attention toward the present, rather than staying stuck in cycles of negativity.
-            </p>
-            <p>
-                A beautiful part of mindfulness is that distractions and wandering thoughts aren’t failures—they’re opportunities to practice bringing focus back, like exercising a muscle in the mind. If negative or restless thoughts arise, they are simply acknowledged, named, and allowed to drift away, making space for more peaceful moments without harsh self-judgment. Many people find that, over time, mindfulness helps them notice early signs of depression before they become overwhelming, helping them respond with kindness and self-care.
-            </p>
-            <p>
-                For anyone new to mindfulness, it’s recommended to start small: just five to ten minutes a day, without striving for any particular result except gentle attention to the present moment. There’s no need to pressure oneself for instant peace or happiness—the process itself is healing, even when the mind feels restless or emotions seem heavy. Little by little, beginners often discover a lighter mind, a softening of sadness, and the return of simple joys, all building a sense of hope that brighter days are possible—one mindful breath, one gentle moment at a time.
+                Scientific studies show that practicing mindfulness for just 10 minutes a day can actually change the structure of the brain, strengthening the ability to handle difficult emotions and preventing repeated episodes of depression. People who meditate regularly learn to experience feelings like sadness without being overwhelmed or tangled up in negative thoughts—unlike those who do not meditate, who often get caught up in dwelling and worrying.
             </p>
         </div>
     ),
@@ -34,7 +28,7 @@ const guideContent: {[key: string]: React.ReactNode} = {
                 Managing stress and anxiety—and building healthy habits in the process—can feel like a daunting journey, especially when life feels overwhelming. Yet, mindfulness offers a simple, step-by-step refuge for anyone seeking peace.
             </p>
             <p>
-                Even just ten minutes of mindful meditation a day can help quiet racing thoughts, calm the body, and allow moments of deep relaxation; these brief pauses gently send signals of safety to the brain, lowering stress hormones and inviting a soothing sense of control back into life.
+                Even just ten minutes of mindful meditation a day can help quiet racing thoughts, calm the body, and allow moments of deep relaxation; these brief pauses gently send signals of safety to the brain, lowering stress hormones, and inviting a soothing sense of control back into life.
             </p>
             <p>
                 With repeated practice, mindfulness changes the brain, making it easier to respond to stress with clarity instead of spiraling into negative thinking.
