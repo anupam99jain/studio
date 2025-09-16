@@ -100,7 +100,15 @@ export default function CounselorBookingPage() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-            <h2 className="text-xl font-semibold">Available Counselors</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Available Counselors</h2>
+               <Button variant="outline" asChild>
+                  <Link href="https://www.psychologytoday.com/us/therapists" target="_blank">
+                      Find More
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                  </Link>
+              </Button>
+            </div>
             {counselors.map((counselor) => (
                 <Card key={counselor.name}>
                     <CardHeader className="flex flex-row items-center gap-4">
@@ -114,12 +122,6 @@ export default function CounselorBookingPage() {
                         </div>
                     </CardHeader>
                     <CardFooter className="flex justify-end gap-4">
-                        <Button variant="outline" asChild>
-                            <Link href="https://www.psychologytoday.com/us/therapists" target="_blank">
-                                Find More
-                                <ExternalLink className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
                         <Button onClick={() => handleBookClick(counselor)}>Book Appointment</Button>
                     </CardFooter>
                 </Card>
