@@ -12,9 +12,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, AlertTriangle } from "lucide-react";
+import { Phone, AlertTriangle, ExternalLink } from "lucide-react";
 import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 import { useAppContext } from "../app-context";
+import Link from "next/link";
 
 const counselors = [
   {
@@ -112,8 +113,14 @@ export default function CounselorBookingPage() {
                             <CardDescription>{counselor.specialty}</CardDescription>
                         </div>
                     </CardHeader>
-                    <CardFooter>
-                        <Button className="ml-auto" onClick={() => handleBookClick(counselor)}>Book Appointment</Button>
+                    <CardFooter className="flex justify-end gap-4">
+                        <Button variant="outline" asChild>
+                            <Link href="https://www.psychologytoday.com/us/therapists" target="_blank">
+                                Find More
+                                <ExternalLink className="ml-2 h-4 w-4" />
+                            </Link>
+                        </Button>
+                        <Button onClick={() => handleBookClick(counselor)}>Book Appointment</Button>
                     </CardFooter>
                 </Card>
             ))}
