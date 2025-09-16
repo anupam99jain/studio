@@ -97,13 +97,19 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
       case "video":
         return (
             <>
-                <DialogHeader className="sr-only">
+                <DialogHeader>
                     <DialogTitle>{resource.description}</DialogTitle>
                     <DialogDescription>Video player for {resource.description}</DialogDescription>
                 </DialogHeader>
-                <div className="bg-muted rounded-lg p-8 flex flex-col items-center justify-center text-center">
-                    <Video className="h-16 w-16 text-primary mb-4" />
-                    <p className="text-lg font-medium mb-4">Now playing: {resource.description}</p>
+                <div className="aspect-video">
+                    <iframe 
+                        className="w-full h-full rounded-lg"
+                        src="https://www.youtube.com/embed/aEqlQvczMJQ" 
+                        title="YouTube video player" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                    </iframe>
                 </div>
             </>
         );
