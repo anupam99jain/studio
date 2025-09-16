@@ -28,6 +28,29 @@ const guideContent: {[key: string]: React.ReactNode} = {
             </p>
         </div>
     ),
+    "guide_2": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                Managing stress and anxiety—and building healthy habits in the process—can feel like a daunting journey, especially when life feels overwhelming. Yet, mindfulness offers a simple, step-by-step refuge for anyone seeking peace.
+            </p>
+            <p>
+                Even just ten minutes of mindful meditation a day can help quiet racing thoughts, calm the body, and allow moments of deep relaxation; these brief pauses gently send signals of safety to the brain, lowering stress hormones and inviting a soothing sense of control back into life.
+            </p>
+            <p>
+                With repeated practice, mindfulness changes the brain, making it easier to respond to stress with clarity instead of spiraling into negative thinking.
+            </p>
+        </div>
+    ),
+    "guide_3": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                This is a placeholder for the 'Building Healthy Habits' guide. This space will soon contain practical tips and strategies to help you cultivate positive routines for your mental and physical well-being.
+            </p>
+            <p>
+                Remember that starting small is the key. Choose one simple habit, like drinking a glass of water when you wake up or taking a five-minute walk, and build from there.
+            </p>
+        </div>
+    ),
     "default": (
         <div className="prose prose-sm max-w-none text-foreground">
             <p className="lead">
