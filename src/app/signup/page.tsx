@@ -109,7 +109,7 @@ export default function SignupPage() {
               )}
               
               {!showOtp ? (
-                <Button type="button" className="w-full" onClick={handleSendOtp}>
+                <Button type="button" className="w-full" onClick={handleSendOtp} disabled={!phone}>
                   Send OTP
                 </Button>
               ) : (
