@@ -4,12 +4,12 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from "@/components/ui/sidebar";
-import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun, Home, Image as ImageIcon } from "lucide-react";
+import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun, Home, Image as ImageIcon, Palette } from "lucide-react";
 import Link from "next/link";
 import { FlourishULogo } from "@/components/logo";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "./app-context";
 import { useRef, ChangeEvent } from "react";
@@ -18,9 +18,9 @@ function UserProfile() {
   const { student, setStudent } = useAppContext();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { setTheme, theme } = useTheme();
   
   const handleLogout = () => {
-    // In a real app, you'd handle Firebase sign out here
     router.push('/login');
   };
 
@@ -74,7 +74,32 @@ function UserProfile() {
               />
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <ThemeToggle />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <Palette className="mr-2 h-4 w-4" />
+              <span>Theme</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
+              <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+                <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+                <DropdownMenuSeparator/>
+                <DropdownMenuRadioItem value="green">Green</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark-green">Dark Green</DropdownMenuRadioItem>
+                <DropdownMenuSeparator/>
+                <DropdownMenuRadioItem value="blue">Blue</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark-blue">Dark Blue</DropdownMenuRadioItem>
+                <DropdownMenuSeparator/>
+                <DropdownMenuRadioItem value="orange">Orange</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark-orange">Dark Orange</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+          <DropdownMenuItem onClick={() => setTheme(theme?.includes('dark') ? 'light' : 'dark')}>
+            <Sun className="mr-2 h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span>Toggle Dark Mode</span>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
