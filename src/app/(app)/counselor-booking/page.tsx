@@ -101,7 +101,7 @@ export default function CounselorBookingPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold">Available Counselors</h2>
+              <h2 className="text-xl font-semibold">Available Counselors on campus</h2>
                <Button variant="outline" asChild>
                   <Link href="https://www.psychologytoday.com/us/therapists" target="_blank">
                       Find More
