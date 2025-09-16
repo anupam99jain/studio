@@ -4,19 +4,22 @@
       "id": "audio_1",
       "description": "Calm ocean waves",
       "imageUrl": "https://picsum.photos/seed/101/600/400",
-      "imageHint": "ocean waves"
+      "imageHint": "ocean waves",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-1.mp3"
     },
     {
       "id": "audio_2",
       "description": "Forest sounds",
       "imageUrl": "https://picsum.photos/seed/102/600/400",
-      "imageHint": "forest path"
+      "imageHint": "forest path",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-2.mp3"
     },
     {
       "id": "audio_3",
       "description": "Energizing music",
       "imageUrl": "https://picsum.photos/seed/103/600/400",
-      "imageHint": "upbeat music"
+      "imageHint": "upbeat music",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-3.mp3"
     },
     {
       "id": "guide_1",
@@ -40,19 +43,22 @@
       "id": "video_1",
       "description": "Guided Meditation for Sleep",
       "imageUrl": "https://picsum.photos/seed/301/600/400",
-      "imageHint": "night sky"
+      "imageHint": "night sky",
+      "videoUrl": "https://www.youtube.com/embed/40bPxbFUCj4"
     },
     {
       "id": "video_2",
       "description": "Yoga for Relaxation",
       "imageUrl": "https://picsum.photos/seed/302/600/400",
-      "imageHint": "yoga sunset"
+      "imageHint": "yoga sunset",
+      "videoUrl": "https://www.youtube.com/embed/v7AYKMP6rOE"
     },
     {
       "id": "video_3",
       "description": "Breathing Exercises",
       "imageUrl": "https://picsum.photos/seed/303/600/400",
-      "imageHint": "mountain view"
+      "imageHint": "mountain view",
+      "videoUrl": "https://www.youtube.com/embed/Uxbdx-SeOOo"
     }
   ]
 }

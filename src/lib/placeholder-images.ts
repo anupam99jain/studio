@@ -7,6 +7,7 @@ export type ImagePlaceholder = {
   imageUrl: string;
   imageHint: string;
   audioUrl?: string;
+  videoUrl?: string;
 };
 
 export const PlaceHolderImages: ImagePlaceholder[] = data.placeholderImages;

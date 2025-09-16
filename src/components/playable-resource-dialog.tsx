@@ -104,7 +104,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
                 <div className="aspect-video">
                     <iframe 
                         className="w-full h-full rounded-lg"
-                        src="https://www.youtube.com/embed/40bPxbFUCj4" 
+                        src={resource.videoUrl}
                         title="YouTube video player" 
                         frameBorder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
