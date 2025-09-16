@@ -1,25 +1,43 @@
 
+
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarFooter, SidebarInset } from "@/components/ui/sidebar";
-import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun, Home } from "lucide-react";
+import { Bot, CalendarCheck, Library, LogOut, Settings, Users, User as UserIcon, HeartPulse, Moon, Sun, Home, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { FlourishULogo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "./app-context";
+import { useRef, ChangeEvent } from "react";
 
 function UserProfile() {
-  const { student } = useAppContext();
+  const { student, setStudent } = useAppContext();
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const handleLogout = () => {
     // In a real app, you'd handle Firebase sign out here
     router.push('/login');
   };
+
+  const handlePictureChangeClick = () => {
+    fileInputRef.current?.click();
+  }
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setStudent(prev => ({...prev, avatar: reader.result as string}));
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   return (
       <DropdownMenu>
@@ -43,6 +61,17 @@ function UserProfile() {
               <UserIcon className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </Link>
+          </DropdownMenuItem>
+           <DropdownMenuItem onClick={handlePictureChangeClick}>
+              <ImageIcon className="mr-2 h-4 w-4" />
+              <span>Change Picture</span>
+              <input 
+                type="file" 
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+                accept="image/*"
+              />
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <ThemeToggle />
