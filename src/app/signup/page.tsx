@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { FlourishULogo } from "@/components/logo";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -81,7 +82,11 @@ export default function SignupPage() {
             <form className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" type="tel" placeholder="Enter your phone number" required disabled={showOtp} />
+                <PhoneInput
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  disabled={showOtp}
+                />
               </div>
 
               {showOtp && (

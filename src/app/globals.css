@@ -89,4 +89,11 @@ body {
   .dark body {
     background-image: linear-gradient(to right top, #0f172a, #1c2035, #292940, #36324b, #443b57);
   }
+  .PhoneInputInput {
+    @apply flex h-10 w-full rounded-md border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    border-width: 0px;
+  }
+  .PhoneInputCountry {
+    @apply m-2;
+  }
 }
