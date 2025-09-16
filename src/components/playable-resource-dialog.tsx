@@ -11,6 +11,38 @@ interface PlayableResourceDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const guideContent: {[key: string]: React.ReactNode} = {
+    "guide_1": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                Mindfulness is a gentle, deeply healing practice that offers comfort and hope—even for those feeling weighed down by depression. At its heart, mindfulness means simply paying attention to the present moment, just as it is, without judgment or criticism. For beginners, this could be as simple as noticing the sensation of the breath entering and leaving the body, the feeling of clothes on the skin, or the colors and sounds in the environment. There is no need for incense, perfect silence, or crossed legs; mindfulness can be practiced while sitting, lying down, or even during simple daily activities like taking a walk or sipping tea.
+            </p>
+            <p>
+                Scientific studies show that practicing mindfulness for just 10 minutes a day can actually change the structure of the brain, strengthening the ability to handle difficult emotions and preventing repeated episodes of depression. People who meditate regularly learn to experience feelings like sadness without being overwhelmed or tangled up in negative thoughts—unlike those who do not meditate, who often get caught up in dwelling and worrying. Through regular practice, mindfulness helps individuals become more aware of their automatic thought patterns, offering the empowering realization that it’s possible to gently guide attention toward the present, rather than staying stuck in cycles of negativity.
+            </p>
+            <p>
+                A beautiful part of mindfulness is that distractions and wandering thoughts aren’t failures—they’re opportunities to practice bringing focus back, like exercising a muscle in the mind. If negative or restless thoughts arise, they are simply acknowledged, named, and allowed to drift away, making space for more peaceful moments without harsh self-judgment. Many people find that, over time, mindfulness helps them notice early signs of depression before they become overwhelming, helping them respond with kindness and self-care.
+            </p>
+            <p>
+                For anyone new to mindfulness, it’s recommended to start small: just five to ten minutes a day, without striving for any particular result except gentle attention to the present moment. There’s no need to pressure oneself for instant peace or happiness—the process itself is healing, even when the mind feels restless or emotions seem heavy. Little by little, beginners often discover a lighter mind, a softening of sadness, and the return of simple joys, all building a sense of hope that brighter days are possible—one mindful breath, one gentle moment at a time.
+            </p>
+        </div>
+    ),
+    "default": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                This is a placeholder for a guide. In a real application, this space would be filled with rich, helpful content, including text, images, and interactive elements designed to support your wellness journey.
+            </p>
+            <p>
+                For now, take a moment to breathe deeply. Inhale for four counts, hold for four, and exhale for six. Repeat this a few times.
+            </p>
+            <p>
+                Remember, taking small steps and being kind to yourself are key components of mental well-being.
+            </p>
+        </div>
+    )
+}
+
 export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResourceDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,9 +68,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
             <div className="bg-muted rounded-lg p-8 flex flex-col items-center justify-center text-center">
               <Headphones className="h-16 w-16 text-primary mb-4" />
               <p className="text-lg font-medium mb-4">Now playing: {resource.description}</p>
-              <audio controls autoPlay className="w-full">
-                {/* Using a placeholder audio file. In a real app, this would be a dynamic src */}
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+              <audio controls autoPlay className="w-full" src={resource.audioUrl}>
                 Your browser does not support the audio element.
               </audio>
             </div>
@@ -71,17 +101,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
                         </div>
                     </div>
                 </DialogHeader>
-                <div className="prose prose-sm max-w-none text-foreground">
-                    <p className="lead">
-                        This is a placeholder for the '{resource.description}' guide. In a real application, this space would be filled with rich, helpful content, including text, images, and interactive elements designed to support your wellness journey.
-                    </p>
-                    <p>
-                        For now, take a moment to breathe deeply. Inhale for four counts, hold for four, and exhale for six. Repeat this a few times.
-                    </p>
-                    <p>
-                        Remember, taking small steps and being kind to yourself are key components of mental well-being.
-                    </p>
-                </div>
+                {guideContent[resource.id as keyof typeof guideContent] || guideContent.default}
             </>
         );
       default:
