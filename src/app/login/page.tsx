@@ -1,9 +1,14 @@
+
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { FlourishULogo } from "@/components/logo";
+import { useState } from "react";
+import { Label } from "@/components/ui/label";
 
 function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -29,6 +34,14 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function LoginPage() {
+  const [showOtp, setShowOtp] = useState(false);
+
+  const handleSendOtp = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    // Here you would typically call an API to send the OTP
+    setShowOtp(true);
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md shadow-lg">
@@ -65,14 +78,35 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Input id="phone" type="tel" placeholder="Phone Number" required />
+            <form className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input id="phone" type="tel" placeholder="Enter your phone number" required disabled={showOtp} />
+              </div>
+
+              {showOtp && (
+                <div className="space-y-2">
+                  <Label htmlFor="otp">OTP</Label>
+                  <Input id="otp" type="text" placeholder="Enter the 6-digit OTP" required />
+                </div>
+              )}
+              
+              {!showOtp ? (
+                <Button type="button" className="w-full" onClick={handleSendOtp}>
+                  Send OTP
+                </Button>
+              ) : (
+                <Button type="submit" className="w-full" asChild>
+                  <Link href="/role-selection">Verify OTP & Login</Link>
+                </Button>
+              )}
+            </form>
+            <div className="text-center text-sm">
+                Don&apos;t have an account?{' '}
+                <Link href="/role-selection" className="underline">
+                    Create a new account
+                </Link>
             </div>
-            {/* The OTP logic would be implemented here */}
-            {/* For now, we'll just have a continue button */}
-            <Button type="submit" className="w-full" asChild>
-               <Link href="/role-selection">Login with Phone</Link>
-            </Button>
           </div>
         </CardContent>
       </Card>
