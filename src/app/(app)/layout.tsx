@@ -12,7 +12,7 @@ import { FlourishULogo } from "@/components/logo";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "./app-context";
 import { useRef, ChangeEvent } from "react";
-import { ThemeToggle } from "@/components/theme-toggle";
+
 
 function UserProfile() {
   const { student, setStudent } = useAppContext();
@@ -72,7 +72,7 @@ function UserProfile() {
                 accept="image/*"
               />
           </DropdownMenuItem>
-          <ThemeToggle />
+          
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
