@@ -11,6 +11,58 @@ interface PlayableResourceDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const guideContent: {[key: string]: React.ReactNode} = {
+    "guide_1": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                Mindfulness is a gentle, deeply healing practice that offers comfort and hope—even for those feeling weighed down by depression. At its heart, mindfulness means simply paying attention to the present moment, just as it is, without judgment or criticism. For beginners, this could be as simple as noticing the sensation of the breath entering and leaving the body, the feeling of clothes on the skin, or the colors and sounds in the environment. There is no need for incense, perfect silence, or crossed legs; mindfulness can be practiced while sitting, lying down, or even during simple daily activities like taking a walk or sipping tea.
+            </p>
+            <p>
+                Scientific studies show that practicing mindfulness for just 10 minutes a day can actually change the structure of the brain, strengthening the ability to handle difficult emotions and preventing repeated episodes of depression. People who meditate regularly learn to experience feelings like sadness without being overwhelmed or tangled up in negative thoughts—unlike those who do not meditate, who often get caught up in dwelling and worrying.
+            </p>
+        </div>
+    ),
+    "guide_2": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                Managing stress and anxiety—and building healthy habits in the process—can feel like a daunting journey, especially when life feels overwhelming. Yet, mindfulness offers a simple, step-by-step refuge for anyone seeking peace.
+            </p>
+            <p>
+                Even just ten minutes of mindful meditation a day can help quiet racing thoughts, calm the body, and allow moments of deep relaxation; these brief pauses gently send signals of safety to the brain, lowering stress hormones, and inviting a soothing sense of control back into life.
+            </p>
+            <p>
+                With repeated practice, mindfulness changes the brain, making it easier to respond to stress with clarity instead of spiraling into negative thinking.
+            </p>
+        </div>
+    ),
+    "guide_3": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                Building healthy habits goes hand-in-hand with stress management, because small daily routines form the foundation for lasting well-being.
+            </p>
+            <p>
+                Start by choosing just one gentle habit—like maintaining a regular sleep schedule, or making time for a walk or quiet reflection each day. Setting realistic and kind goals for oneself, celebrating even the tiniest progress, and practicing patience on setbacks all reinforce positive behavioral change over time.
+            </p>
+            <p>
+                Sharing intentions with friends or family can offer encouragement and accountability as these healthier habits become a comforting routine.
+            </p>
+        </div>
+    ),
+    "default": (
+        <div className="prose prose-sm max-w-none text-foreground">
+            <p className="lead">
+                This is a placeholder for a guide. In a real application, this space would be filled with rich, helpful content, including text, images, and interactive elements designed to support your wellness journey.
+            </p>
+            <p>
+                For now, take a moment to breathe deeply. Inhale for four counts, hold for four, and exhale for six. Repeat this a few times.
+            </p>
+            <p>
+                Remember, taking small steps and being kind to yourself are key components of mental well-being.
+            </p>
+        </div>
+    )
+}
+
 export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResourceDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,9 +88,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
             <div className="bg-muted rounded-lg p-8 flex flex-col items-center justify-center text-center">
               <Headphones className="h-16 w-16 text-primary mb-4" />
               <p className="text-lg font-medium mb-4">Now playing: {resource.description}</p>
-              <audio controls autoPlay className="w-full">
-                {/* Using a placeholder audio file. In a real app, this would be a dynamic src */}
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+              <audio controls autoPlay className="w-full" src={resource.audioUrl}>
                 Your browser does not support the audio element.
               </audio>
             </div>
@@ -47,13 +97,19 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
       case "video":
         return (
             <>
-                <DialogHeader className="sr-only">
+                <DialogHeader>
                     <DialogTitle>{resource.description}</DialogTitle>
                     <DialogDescription>Video player for {resource.description}</DialogDescription>
                 </DialogHeader>
-                <div className="bg-muted rounded-lg p-8 flex flex-col items-center justify-center text-center">
-                    <Video className="h-16 w-16 text-primary mb-4" />
-                    <p className="text-lg font-medium mb-4">Now playing: {resource.description}</p>
+                <div className="aspect-video">
+                    <iframe 
+                        className="w-full h-full rounded-lg"
+                        src={resource.videoUrl}
+                        title="YouTube video player" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowFullScreen>
+                    </iframe>
                 </div>
             </>
         );
@@ -71,17 +127,7 @@ export function PlayableResourceDialog({ resource, onOpenChange }: PlayableResou
                         </div>
                     </div>
                 </DialogHeader>
-                <div className="prose prose-sm max-w-none text-foreground">
-                    <p className="lead">
-                        This is a placeholder for the '{resource.description}' guide. In a real application, this space would be filled with rich, helpful content, including text, images, and interactive elements designed to support your wellness journey.
-                    </p>
-                    <p>
-                        For now, take a moment to breathe deeply. Inhale for four counts, hold for four, and exhale for six. Repeat this a few times.
-                    </p>
-                    <p>
-                        Remember, taking small steps and being kind to yourself are key components of mental well-being.
-                    </p>
-                </div>
+                {guideContent[resource.id as keyof typeof guideContent] || guideContent.default}
             </>
         );
       default:

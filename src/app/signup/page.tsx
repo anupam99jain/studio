@@ -36,7 +36,7 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [showOtp, setShowOtp] = useState(false);
   const [phone, setPhone] = useState<E164Number | undefined>(undefined);
   const router = useRouter();
@@ -46,12 +46,11 @@ export default function LoginPage() {
     // Here you would typically call an API to send the OTP
     setShowOtp(true);
   };
-  
-  const handleLogin = (e: React.FormEvent) => {
+
+  const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you would verify the OTP here.
-    // We'll just navigate to the home page for now.
-    router.push('/home');
+    // In a real app, you would verify the OTP here before navigating.
+    router.push('/role-selection');
   }
 
   return (
@@ -61,20 +60,20 @@ export default function LoginPage() {
           <div className="mx-auto mb-4">
             <FlourishULogo />
           </div>
-          <CardTitle className="font-headline text-3xl">Welcome Back</CardTitle>
-          <CardDescription>Choose your preferred login method to continue.</CardDescription>
+          <CardTitle className="font-headline text-3xl">Create an Account</CardTitle>
+          <CardDescription>Join FlourishU today. It's free and always will be.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <Button variant="outline" asChild>
-                <Link href="/home">
+                <Link href="/role-selection">
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/home">
+                <Link href="/role-selection">
                   <LinkedinIcon className="mr-2 h-5 w-5" />
                   LinkedIn
                 </Link>
@@ -86,11 +85,11 @@ export default function LoginPage() {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                <span className="bg-card px-2 text-muted-foreground">Or sign up with your phone</span>
               </div>
             </div>
 
-            <form className="space-y-4" onSubmit={handleLogin}>
+            <form className="space-y-4" onSubmit={handleSignUp}>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <PhoneInput
@@ -115,14 +114,14 @@ export default function LoginPage() {
                 </Button>
               ) : (
                 <Button type="submit" className="w-full">
-                  Verify OTP & Login
+                  Verify OTP & Sign Up
                 </Button>
               )}
             </form>
             <div className="text-center text-sm">
-                Don&apos;t have an account?{' '}
-                <Link href="/signup" className="underline">
-                    Create a new account
+                Already have an account?{' '}
+                <Link href="/login" className="underline">
+                    Log in
                 </Link>
             </div>
           </div>

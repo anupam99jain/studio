@@ -1,8 +1,8 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from '@/components/theme-provider';
 import { AppContextProvider } from './(app)/app-context';
+
 
 export const metadata: Metadata = {
   title: 'FlourishU',
@@ -23,15 +23,8 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <AppContextProvider>
-            <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-            >
-                {children}
-                <Toaster />
-            </ThemeProvider>
+            {children}
+            <Toaster />
         </AppContextProvider>
       </body>
     </html>

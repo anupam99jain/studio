@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -8,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, Loader2, Send, User } from "lucide-react";
 import { mentalHealthChatbot } from "@/ai/flows/ai-mental-health-chatbot";
 import { cn } from "@/lib/utils";
+import { useAppContext } from "@/app/(app)/app-context";
 
 interface Message {
   id: string;
@@ -16,6 +18,7 @@ interface Message {
 }
 
 export function AiChat() {
+  const { student } = useAppContext();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -51,7 +54,7 @@ export function AiChat() {
     setIsLoading(true);
 
     try {
-      const { response } = await mentalHealthChatbot({ message: input });
+      const { response } = await mentalHealthChatbot({ message: input, studentName: student.name });
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",

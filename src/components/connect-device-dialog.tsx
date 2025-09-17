@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,139 +11,156 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, RefreshCw } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useAppContext, Device } from "@/app/(app)/app-context";
 
-const deviceData = {
-  "Smartwatch": {
-    "Apple": ["Apple Watch Series 9", "Apple Watch Ultra 2", "Apple Watch SE"],
-    "Fitbit": ["Fitbit Sense 2", "Fitbit Versa 4", "Fitbit Charge 6"],
-    "Garmin": ["Garmin Venu 3", "Garmin Forerunner 965", "Garmin Epix Pro"],
-    "Samsung": ["Galaxy Watch 6", "Galaxy Watch 6 Classic"],
-  },
-  "Smart Ring": {
-    "Oura": ["Oura Ring Gen3"],
-    "Ultrahuman": ["Ultrahuman Ring AIR"],
-    "RingConn": ["RingConn Smart Ring"],
-  },
-};
 
-type DeviceType = "Smartwatch" | "Smart Ring";
+export function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+      <svg
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect width="16" height="16" x="4" y="4" rx="4" />
+        <path d="M12 8v4" />
+        <path d="M12 12h2" />
+        <path d="M4 12H2" />
+        <path d="M20 12h2" />
+        <path d="M12 20v2" />
+        <path d="M12 4V2" />
+      </svg>
+    )
+  }
+  
+  export function SmartRingIcon(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z" />
+            <path d="M12 18a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6Z" />
+        </svg>
+    );
+}
+
+const nearbyDevices: Device[] = [
+    { id: "1", name: "Student's Apple Watch", type: "Smartwatch" },
+    { id: "2", name: "Student's Oura Ring", type: "Smart Ring" },
+    { id: "3", name: "Galaxy Watch 6", type: "Smartwatch" },
+];
 
 interface ConnectDeviceDialogProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  deviceType: DeviceType | null;
 }
 
 export function ConnectDeviceDialog({
   isOpen,
   onOpenChange,
-  deviceType,
 }: ConnectDeviceDialogProps) {
-  const [brand, setBrand] = useState<string | null>(null);
-  const [model, setModel] = useState<string | null>(null);
-  const [isConnecting, setIsConnecting] = useState(false);
+  const [isScanning, setIsScanning] = useState(true);
+  const [connectingDeviceId, setConnectingDeviceId] = useState<string | null>(null);
   const { toast } = useToast();
+  const { setIsDeviceConnected, setConnectedDevice } = useAppContext();
 
-  const brands = useMemo(() => {
-    return deviceType ? Object.keys(deviceData[deviceType]) : [];
-  }, [deviceType]);
-
-  const models = useMemo(() => {
-    if (deviceType && brand && deviceData[deviceType] && deviceData[deviceType][brand as keyof typeof deviceData[DeviceType]]) {
-      return deviceData[deviceType][brand as keyof typeof deviceData[DeviceType]];
+  useEffect(() => {
+    if (isOpen) {
+        setIsScanning(true);
+        setTimeout(() => {
+            setIsScanning(false);
+        }, 1500);
     }
-    return [];
-  }, [deviceType, brand]);
-  
-  const handleBrandChange = (value: string) => {
-    setBrand(value);
-    setModel(null);
-  }
+  }, [isOpen]);
 
-  const handleConnect = () => {
-    if(!brand || !model) {
-        toast({
-            variant: "destructive",
-            title: "Incomplete Selection",
-            description: "Please select both a brand and a model.",
-        });
-        return;
-    }
-    setIsConnecting(true);
+  const handleConnect = (device: Device) => {
+    setConnectingDeviceId(device.id);
     setTimeout(() => {
-        setIsConnecting(false);
+        setConnectingDeviceId(null);
         onOpenChange(false);
+        setIsDeviceConnected(true);
+        setConnectedDevice(device);
         toast({
             title: "Connection Successful!",
-            description: `Your ${brand} ${model} has been connected.`,
+            description: `Your ${device.name} has been connected.`,
         });
-        setBrand(null);
-        setModel(null);
+    }, 1500);
+  };
+  
+  const handleScanAgain = () => {
+    setIsScanning(true);
+    setTimeout(() => {
+        setIsScanning(false);
     }, 1500)
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Connect your {deviceType}</DialogTitle>
+          <DialogTitle>Nearby Devices</DialogTitle>
           <DialogDescription>
-            Select the brand and model of your device to sync your data.
+            Select a device to connect and sync your data.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="brand">Brand</Label>
-            <Select onValueChange={handleBrandChange} value={brand || ""}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a brand" />
-              </SelectTrigger>
-              <SelectContent>
-                {brands.map((b) => (
-                  <SelectItem key={b} value={b}>
-                    {b}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="model">Model</Label>
-            <Select onValueChange={setModel} value={model || ""} disabled={!brand || models.length === 0}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a model" />
-              </SelectTrigger>
-              <SelectContent>
-                {models.map((m) => (
-                  <SelectItem key={m} value={m}>
-                    {m}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+        <div className="py-4 space-y-4">
+            {isScanning ? (
+                <div className="flex items-center justify-center p-8 space-x-2 text-muted-foreground">
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>Scanning for devices...</span>
+                </div>
+            ) : (
+                <div className="space-y-3">
+                    {nearbyDevices.map(device => (
+                        <Card key={device.id}>
+                            <CardContent className="p-3 flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    {device.type === 'Smartwatch' ? <SmartwatchIcon className="h-6 w-6 text-primary" /> : <SmartRingIcon className="h-6 w-6 text-primary" />}
+                                    <span className="font-medium">{device.name}</span>
+                                </div>
+                                <Button 
+                                    size="sm"
+                                    onClick={() => handleConnect(device)}
+                                    disabled={!!connectingDeviceId}
+                                >
+                                    {connectingDeviceId === device.id ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Connecting...
+                                        </>
+                                    ): "Connect"}
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            )}
         </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isConnecting}>
-            Cancel
+        <DialogFooter className="sm:justify-between">
+          <Button variant="outline" onClick={handleScanAgain} disabled={isScanning || !!connectingDeviceId}>
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Scan Again
           </Button>
-          <Button type="submit" onClick={handleConnect} disabled={isConnecting || !brand || !model}>
-            {isConnecting ? (
-                <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Connecting...
-                </>
-            ) : "Connect Device" }
+          <Button variant="secondary" onClick={() => onOpenChange(false)} disabled={!!connectingDeviceId}>
+            Close
           </Button>
         </DialogFooter>
       </DialogContent>

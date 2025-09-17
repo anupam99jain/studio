@@ -1,58 +1,65 @@
+
 {
   "placeholderImages": [
     {
       "id": "audio_1",
       "description": "Calm ocean waves",
-      "imageUrl": "https://picsum.photos/seed/101/600/400",
-      "imageHint": "ocean waves"
+      "imageUrl": "https://images.unsplash.com/photo-1610586567122-f9f885713761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxvY2VhbiUyMHdhdmVzfGVufDB8fHx8MTc1ODEyMjUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ocean waves",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-1.mp3"
     },
     {
       "id": "audio_2",
-      "description": "Forest sounds",
-      "imageUrl": "https://picsum.photos/seed/102/600/400",
-      "imageHint": "forest path"
+      "description": "Relaxing forest sounds",
+      "imageUrl": "https://images.unsplash.com/photo-1623967680551-3e4694e2c9ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmb3Jlc3QlMjBwYXRofGVufDB8fHx8MTc1ODAxNjE5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "forest path",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-2.mp3"
     },
     {
       "id": "audio_3",
       "description": "Energizing music",
-      "imageUrl": "https://picsum.photos/seed/103/600/400",
-      "imageHint": "upbeat music"
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtdXNpYyUyMGVuZXJneXxlbnwwfHx8fDE3NTgxMjI2NzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music energy",
+      "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-3.mp3"
     },
     {
       "id": "guide_1",
       "description": "Mindfulness for Beginners",
-      "imageUrl": "https://picsum.photos/seed/201/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1663680603289-4a8936f5bed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZWRpdGF0aW9uJTIwbmF0dXJlfGVufDB8fHx8MTc1ODEyMjQ1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "meditation nature"
     },
     {
       "id": "guide_2",
       "description": "Managing Stress and Anxiety",
-      "imageUrl": "https://picsum.photos/seed/202/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1594175268654-e60bea6c037c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjYWxtJTIwbGFrZXxlbnwwfHx8fDE3NTgxMjI0NTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "calm lake"
     },
     {
       "id": "guide_3",
       "description": "Building Healthy Habits",
-      "imageUrl": "https://picsum.photos/seed/203/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1556386734-4227a180d19e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxoZWFsdGh5JTIwZm9vZHxlbnwwfHx8fDE3NTgxMjI0NTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "healthy food"
     },
     {
       "id": "video_1",
       "description": "Guided Meditation for Sleep",
-      "imageUrl": "https://picsum.photos/seed/301/600/400",
-      "imageHint": "night sky"
+      "imageUrl": "https://images.unsplash.com/photo-1467810160588-c86c0deb5d16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxuaWdodCUyMHNreXxlbnwwfHx8fDE3NTgxMjI0MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "night sky",
+      "videoUrl": "https://www.youtube.com/embed/g0jfhRcXtLQ"
     },
     {
       "id": "video_2",
       "description": "Yoga for Relaxation",
-      "imageUrl": "https://picsum.photos/seed/302/600/400",
-      "imageHint": "yoga sunset"
+      "imageUrl": "https://images.unsplash.com/photo-1571103189706-cd54b23e81f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b2dhJTIwc3Vuc2V0fGVufDB8fHx8MTc1ODEyMjQwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "yoga sunset",
+      "videoUrl": "https://www.youtube.com/embed/v7AYKMP6rOE"
     },
     {
       "id": "video_3",
       "description": "Breathing Exercises",
-      "imageUrl": "https://picsum.photos/seed/303/600/400",
-      "imageHint": "mountain view"
+      "imageUrl": "https://images.unsplash.com/photo-1516366353199-ed694fec414f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb3VudGFpbiUyMHZpZXd8ZW58MHx8fHwxNzU4MTIyNDA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mountain view",
+      "videoUrl": "https://www.youtube.com/embed/Uxbdx-SeOOo"
     }
   ]
 }
