@@ -14,10 +14,10 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { useAppContext } from "@/app/(app)/app-context";
+import { useAppContext, Device } from "@/app/(app)/app-context";
 
 
-function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
+export function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
     return (
       <svg
         {...props}
@@ -42,7 +42,7 @@ function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
     )
   }
   
-  function SmartRingIcon(props: React.SVGProps<SVGSVGElement>) {
+  export function SmartRingIcon(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}
@@ -62,7 +62,7 @@ function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
     );
 }
 
-const nearbyDevices = [
+const nearbyDevices: Device[] = [
     { id: "1", name: "Student's Apple Watch", type: "Smartwatch" },
     { id: "2", name: "Student's Oura Ring", type: "Smart Ring" },
     { id: "3", name: "Galaxy Watch 6", type: "Smartwatch" },
@@ -80,7 +80,7 @@ export function ConnectDeviceDialog({
   const [isScanning, setIsScanning] = useState(true);
   const [connectingDeviceId, setConnectingDeviceId] = useState<string | null>(null);
   const { toast } = useToast();
-  const { setIsDeviceConnected } = useAppContext();
+  const { setIsDeviceConnected, setConnectedDevice } = useAppContext();
 
   useEffect(() => {
     if (isOpen) {
@@ -91,15 +91,16 @@ export function ConnectDeviceDialog({
     }
   }, [isOpen]);
 
-  const handleConnect = (deviceId: string, deviceName: string) => {
-    setConnectingDeviceId(deviceId);
+  const handleConnect = (device: Device) => {
+    setConnectingDeviceId(device.id);
     setTimeout(() => {
         setConnectingDeviceId(null);
         onOpenChange(false);
         setIsDeviceConnected(true);
+        setConnectedDevice(device);
         toast({
             title: "Connection Successful!",
-            description: `Your ${deviceName} has been connected.`,
+            description: `Your ${device.name} has been connected.`,
         });
     }, 1500);
   };
@@ -137,7 +138,7 @@ export function ConnectDeviceDialog({
                                 </div>
                                 <Button 
                                     size="sm"
-                                    onClick={() => handleConnect(device.id, device.name)}
+                                    onClick={() => handleConnect(device)}
                                     disabled={!!connectingDeviceId}
                                 >
                                     {connectingDeviceId === device.id ? (

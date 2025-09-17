@@ -31,6 +31,12 @@ type Appointment = {
     date: string; // ISO string
 };
 
+export type Device = {
+    id: string;
+    name: string;
+    type: "Smartwatch" | "Smart Ring";
+}
+
 const scoreInterpretations = {
   phq9: {
     levels: { "0-4": "Minimal", "5-9": "Mild", "10-14": "Moderate", "15-19": "Moderately Severe", "20-27": "Severe" },
@@ -52,6 +58,8 @@ type AppContextType = {
     getInterpretation: (type: 'phq9' | 'gad7' | 'ghq12', score: number) => string;
     isDeviceConnected: boolean;
     setIsDeviceConnected: React.Dispatch<React.SetStateAction<boolean>>;
+    connectedDevice: Device | null;
+    setConnectedDevice: React.Dispatch<React.SetStateAction<Device | null>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -72,6 +80,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     });
     const [appointments, setAppointments] = useState<Appointment[]>([]);
     const [isDeviceConnected, setIsDeviceConnected] = useState(false);
+    const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
 
     const addAppointment = (appointment: Appointment) => {
         setAppointments(prev => [...prev, appointment]);
@@ -97,7 +106,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <AppContext.Provider value={{ student, setStudent, appointments, addAppointment, addWellnessEntry, getInterpretation, isDeviceConnected, setIsDeviceConnected }}>
+        <AppContext.Provider value={{ student, setStudent, appointments, addAppointment, addWellnessEntry, getInterpretation, isDeviceConnected, setIsDeviceConnected, connectedDevice, setConnectedDevice }}>
             {children}
         </AppContext.Provider>
     );

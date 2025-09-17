@@ -4,14 +4,26 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { HeartPulse, Activity, Zap, Moon, Wifi } from "lucide-react";
-import { ConnectDeviceDialog } from "@/components/connect-device-dialog";
+import { HeartPulse, Activity, Zap, Moon, Wifi, WifiOff } from "lucide-react";
+import { ConnectDeviceDialog, SmartRingIcon, SmartwatchIcon } from "@/components/connect-device-dialog";
 import { useAppContext } from "../app-context";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useToast } from "@/hooks/use-toast";
 
 export default function WearableMonitoringPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { isDeviceConnected } = useAppContext();
+  const { isDeviceConnected, connectedDevice, setIsDeviceConnected, setConnectedDevice } = useAppContext();
+  const { toast } = useToast();
+
+  const handleDisconnect = () => {
+    const deviceName = connectedDevice?.name || "Your device";
+    setIsDeviceConnected(false);
+    setConnectedDevice(null);
+    toast({
+        title: "Device Disconnected",
+        description: `${deviceName} has been disconnected.`,
+    });
+  }
 
   return (
     <div className="space-y-8">
@@ -20,18 +32,39 @@ export default function WearableMonitoringPage() {
         <p className="text-muted-foreground">Connect your smart devices to track your physical and mental wellness.</p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Connect Your Devices</CardTitle>
-          <CardDescription>Link your smart devices to automatically sync your data.</CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-            <Button onClick={() => setIsDialogOpen(true)}>
-                <Wifi className="mr-2 h-4 w-4" />
-                Scan for Nearby Devices
-            </Button>
-        </CardContent>
-      </Card>
+      {isDeviceConnected && connectedDevice ? (
+        <Card>
+            <CardHeader>
+                <CardTitle>Connected Device</CardTitle>
+                <CardDescription>Your {connectedDevice.name} is currently synced.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                {connectedDevice.type === 'Smartwatch' ? (
+                    <SmartwatchIcon className="h-16 w-16 text-primary mb-4" />
+                ) : (
+                    <SmartRingIcon className="h-16 w-16 text-primary mb-4" />
+                )}
+                <p className="text-xl font-semibold">{connectedDevice.name}</p>
+                <Button onClick={handleDisconnect} variant="destructive" className="mt-4">
+                    <WifiOff className="mr-2 h-4 w-4" />
+                    Disconnect
+                </Button>
+            </CardContent>
+        </Card>
+      ) : (
+        <Card>
+            <CardHeader>
+            <CardTitle>Connect Your Devices</CardTitle>
+            <CardDescription>Link your smart devices to automatically sync your data.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                <Button onClick={() => setIsDialogOpen(true)}>
+                    <Wifi className="mr-2 h-4 w-4" />
+                    Scan for Nearby Devices
+                </Button>
+            </CardContent>
+        </Card>
+      )}
       
       {isDeviceConnected ? (
         <Card>
