@@ -48,7 +48,6 @@ function UserProfile() {
             </Avatar>
             <div className="text-left">
               <p className="text-sm font-medium">{student.name || 'Student User'}</p>
-              <p className="text-xs text-muted-foreground">{student.email}</p>
             </div>
           </Button>
         </DropdownMenuTrigger>

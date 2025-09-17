@@ -43,7 +43,6 @@ export default function HomePage() {
                 </Avatar>
                 <div>
                     <CardTitle className="text-2xl">{student.name}</CardTitle>
-                    <CardDescription>{student.email}</CardDescription>
                 </div>
             </CardHeader>
             <CardContent>
