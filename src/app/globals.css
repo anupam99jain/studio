@@ -83,11 +83,6 @@ body {
     --primary-foreground: 355.7 100% 97.3%;
     --ring: 142.1 76.2% 36.3%;
   }
-  .dark-green {
-    --primary: 142.1 70.2% 46.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --ring: 142.1 70.2% 46.3%;
-  }
   .blue {
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
