@@ -4,21 +4,21 @@
     {
       "id": "audio_1",
       "description": "Calm ocean waves",
-      "imageUrl": "https://picsum.photos/seed/101/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1610586567122-f9f885713761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxvY2VhbiUyMHdhdmVzfGVufDB8fHx8MTc1ODEyMjUwNnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "ocean waves",
       "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-1.mp3"
     },
     {
       "id": "audio_2",
       "description": "Relaxing forest sounds",
-      "imageUrl": "https://picsum.photos/seed/102/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1623967680551-3e4694e2c9ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmb3Jlc3QlMjBwYXRofGVufDB8fHx8MTc1ODAxNjE5NHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "forest path",
       "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-2.mp3"
     },
     {
       "id": "audio_3",
       "description": "Energizing music",
-      "imageUrl": "https://picsum.photos/seed/103/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1667831050122-1cd526da2950?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx1cGJlYXQlMjBtdXNpY3xlbnwwfHx8fDE3NTgxMjI1MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "upbeat music",
       "audioUrl": "https://storage.googleapis.com/stately-videos/24-hour-mindful-audio/Mindful-Audio-3.mp3"
     },
