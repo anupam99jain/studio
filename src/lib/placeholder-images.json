@@ -42,21 +42,21 @@
     {
       "id": "video_1",
       "description": "Guided Meditation for Sleep",
-      "imageUrl": "https://picsum.photos/seed/301/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1467810160588-c86c0deb5d16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxuaWdodCUyMHNreXxlbnwwfHx8fDE3NTgxMjI0MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "night sky",
       "videoUrl": "https://www.youtube.com/embed/g0jfhRcXtLQ"
     },
     {
       "id": "video_2",
       "description": "Yoga for Relaxation",
-      "imageUrl": "https://picsum.photos/seed/302/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1571103189706-cd54b23e81f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b2dhJTIwc3Vuc2V0fGVufDB8fHx8MTc1ODEyMjQwNXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "yoga sunset",
       "videoUrl": "https://www.youtube.com/embed/v7AYKMP6rOE"
     },
     {
       "id": "video_3",
       "description": "Breathing Exercises",
-      "imageUrl": "https://picsum.photos/seed/303/600/400",
+      "imageUrl": "https://images.unsplash.com/photo-1516366353199-ed694fec414f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb3VudGFpbiUyMHZpZXd8ZW58MHx8fHwxNzU4MTIyNDA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "mountain view",
       "videoUrl": "https://www.youtube.com/embed/Uxbdx-SeOOo"
     }
