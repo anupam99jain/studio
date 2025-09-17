@@ -14,6 +14,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useAppContext } from "@/app/(app)/app-context";
 
 
 function SmartwatchIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -79,6 +80,7 @@ export function ConnectDeviceDialog({
   const [isScanning, setIsScanning] = useState(true);
   const [connectingDeviceId, setConnectingDeviceId] = useState<string | null>(null);
   const { toast } = useToast();
+  const { setIsDeviceConnected } = useAppContext();
 
   useEffect(() => {
     if (isOpen) {
@@ -94,6 +96,7 @@ export function ConnectDeviceDialog({
     setTimeout(() => {
         setConnectingDeviceId(null);
         onOpenChange(false);
+        setIsDeviceConnected(true);
         toast({
             title: "Connection Successful!",
             description: `Your ${deviceName} has been connected.`,

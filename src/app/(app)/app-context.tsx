@@ -50,6 +50,8 @@ type AppContextType = {
     addAppointment: (appointment: Appointment) => void;
     addWellnessEntry: (entry: WellnessEntry) => void;
     getInterpretation: (type: 'phq9' | 'gad7' | 'ghq12', score: number) => string;
+    isDeviceConnected: boolean;
+    setIsDeviceConnected: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -69,6 +71,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         wellnessHistory: initialWellnessHistory,
     });
     const [appointments, setAppointments] = useState<Appointment[]>([]);
+    const [isDeviceConnected, setIsDeviceConnected] = useState(false);
 
     const addAppointment = (appointment: Appointment) => {
         setAppointments(prev => [...prev, appointment]);
@@ -94,7 +97,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <AppContext.Provider value={{ student, setStudent, appointments, addAppointment, addWellnessEntry, getInterpretation }}>
+        <AppContext.Provider value={{ student, setStudent, appointments, addAppointment, addWellnessEntry, getInterpretation, isDeviceConnected, setIsDeviceConnected }}>
             {children}
         </AppContext.Provider>
     );
